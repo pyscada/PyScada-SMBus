@@ -1,5 +1,5 @@
 PyScada SM Bus Extension
-======================
+========================
 
 This is a extension for PyScada to support SM Bus devices.
 
