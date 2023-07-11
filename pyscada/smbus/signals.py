@@ -2,7 +2,12 @@
 from __future__ import unicode_literals
 
 from pyscada.models import Variable, Device
-from pyscada.smbus.models import SMBusVariable, SMBusDevice, ExtendedSMBusDevice, ExtendedSMBusVariable
+from pyscada.smbus.models import (
+    SMBusVariable,
+    SMBusDevice,
+    ExtendedSMBusDevice,
+    ExtendedSMBusVariable,
+)
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_delete
@@ -25,9 +30,13 @@ def _reinit_daq_daemons(sender, instance, **kwargs):
     elif type(instance) is SMBusVariable:
         post_save.send_robust(sender=Variable, instance=instance.smbus_variable)
     elif type(instance) is ExtendedSMBusVariable:
-        post_save.send_robust(sender=Variable, instance=Variable.objects.get(pk=instance.pk))
+        post_save.send_robust(
+            sender=Variable, instance=Variable.objects.get(pk=instance.pk)
+        )
     elif type(instance) is ExtendedSMBusDevice:
-        post_save.send_robust(sender=Device, instance=Device.objects.get(pk=instance.pk))
+        post_save.send_robust(
+            sender=Device, instance=Device.objects.get(pk=instance.pk)
+        )
 
 
 @receiver(pre_delete, sender=SMBusVariable)
@@ -43,6 +52,10 @@ def _del_daq_daemons(sender, instance, **kwargs):
     elif type(instance) is SMBusVariable:
         pre_delete.send_robust(sender=Variable, instance=instance.smbus_variable)
     elif type(instance) is ExtendedSMBusVariable:
-        pre_delete.send_robust(sender=Variable, instance=Variable.objects.get(pk=instance.pk))
+        pre_delete.send_robust(
+            sender=Variable, instance=Variable.objects.get(pk=instance.pk)
+        )
     elif type(instance) is ExtendedSMBusDevice:
-        pre_delete.send_robust(sender=Device, instance=Device.objects.get(pk=instance.pk))
+        pre_delete.send_robust(
+            sender=Device, instance=Device.objects.get(pk=instance.pk)
+        )

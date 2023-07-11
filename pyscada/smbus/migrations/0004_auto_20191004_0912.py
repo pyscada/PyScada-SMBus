@@ -5,20 +5,23 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('smbus', '0003_extendedsmbusdevice_extendedsmbusvariable'),
+        ("smbus", "0003_extendedsmbusdevice_extendedsmbusvariable"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='smbusdevice',
-            name='smbus_device',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pyscada.Device'),
+            model_name="smbusdevice",
+            name="smbus_device",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="pyscada.Device"
+            ),
         ),
         migrations.AlterField(
-            model_name='smbusvariable',
-            name='smbus_variable',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='pyscada.Variable'),
+            model_name="smbusvariable",
+            name="smbus_variable",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="pyscada.Variable"
+            ),
         ),
     ]

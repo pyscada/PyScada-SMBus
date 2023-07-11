@@ -16,16 +16,17 @@ def move_device_handlers(apps, schema_editor):
         item.smbus_device.save()
         count += 1
 
-    logger.info('moved %d SMbus Handler\n' % count)
+    logger.info("moved %d SMbus Handler\n" % count)
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('smbus', '0011_auto_20220105_1013'),
-        ('pyscada', '0100_device_instrument_handler')
+        ("smbus", "0011_auto_20220105_1013"),
+        ("pyscada", "0100_device_instrument_handler"),
     ]
 
     operations = [
-        migrations.RunPython(move_device_handlers, reverse_code=migrations.RunPython.noop),
+        migrations.RunPython(
+            move_device_handlers, reverse_code=migrations.RunPython.noop
+        ),
     ]

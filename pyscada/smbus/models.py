@@ -13,9 +13,14 @@ logger = logging.getLogger(__name__)
 
 class SMBusDevice(models.Model):
     smbus_device = models.OneToOneField(Device, on_delete=models.CASCADE)
-    port = models.CharField(default='1', max_length=400, )
-    address_choices = [(i, '0x%s/%d' % (hex(i), i)) for i in range(256)]
-    address = models.PositiveSmallIntegerField(default=address_choices[0][0], choices=address_choices, null=True)
+    port = models.CharField(
+        default="1",
+        max_length=400,
+    )
+    address_choices = [(i, "0x%s/%d" % (hex(i), i)) for i in range(256)]
+    address = models.PositiveSmallIntegerField(
+        default=address_choices[0][0], choices=address_choices, null=True
+    )
 
     protocol_id = PROTOCOL_ID
 
@@ -31,7 +36,10 @@ class SMBusDevice(models.Model):
 
 class SMBusVariable(models.Model):
     smbus_variable = models.OneToOneField(Variable, on_delete=models.CASCADE)
-    information = models.CharField(default='None', max_length=400, )
+    information = models.CharField(
+        default="None",
+        max_length=400,
+    )
 
     protocol_id = PROTOCOL_ID
 
@@ -42,12 +50,12 @@ class SMBusVariable(models.Model):
 class ExtendedSMBusDevice(Device):
     class Meta:
         proxy = True
-        verbose_name = 'SMBus Device'
-        verbose_name_plural = 'SMBus Devices'
+        verbose_name = "SMBus Device"
+        verbose_name_plural = "SMBus Devices"
 
 
 class ExtendedSMBusVariable(Variable):
     class Meta:
         proxy = True
-        verbose_name = 'SMBus Variable'
-        verbose_name_plural = 'SMBus Variables'
+        verbose_name = "SMBus Variable"
+        verbose_name_plural = "SMBus Variables"

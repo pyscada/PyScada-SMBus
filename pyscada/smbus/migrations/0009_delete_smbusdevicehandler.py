@@ -4,13 +4,12 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('smbus', '0008_remove_smbusdevice_instrument'),
+        ("smbus", "0008_remove_smbusdevice_instrument"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='SMBusDeviceHandler',
+            name="SMBusDeviceHandler",
         ),
     ]

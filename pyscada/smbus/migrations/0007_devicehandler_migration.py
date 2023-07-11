@@ -15,10 +15,13 @@ def move_smbus_device_handlers(apps, schema_editor):
     items = []
     count = 0
     for item in SMBusHandler.objects.using(schema_editor.connection.alias).all():
-        items.append(Handler(name=item.name,
-                             handler_class=item.handler_class,
-                             handler_path=item.handler_path,
-                             ))
+        items.append(
+            Handler(
+                name=item.name,
+                handler_class=item.handler_class,
+                handler_path=item.handler_path,
+            )
+        )
 
         count += 1
 
@@ -28,23 +31,26 @@ def move_smbus_device_handlers(apps, schema_editor):
     for item in SMBusHandler.objects.using(schema_editor.connection.alias).all():
         for device in SMBusDevice.objects.using(schema_editor.connection.alias).all():
             if device.instrument == item:
-                device.instrument_handler = Handler.objects.filter(name=item.name,
-                                                                   handler_class=item.handler_class,
-                                                                   handler_path=item.handler_path,).first()
+                device.instrument_handler = Handler.objects.filter(
+                    name=item.name,
+                    handler_class=item.handler_class,
+                    handler_path=item.handler_path,
+                ).first()
                 devices.append(device)
 
         # item.delete()
-    SMBusDevice.objects.bulk_update(devices, ['instrument_handler'])
+    SMBusDevice.objects.bulk_update(devices, ["instrument_handler"])
 
-    logger.info('moved %d SMBusHandler\n' % count)
+    logger.info("moved %d SMBusHandler\n" % count)
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('smbus', '0006_smbusdevice_instrument_handler'),
+        ("smbus", "0006_smbusdevice_instrument_handler"),
     ]
 
     operations = [
-        migrations.RunPython(move_smbus_device_handlers, reverse_code=migrations.RunPython.noop),
+        migrations.RunPython(
+            move_smbus_device_handlers, reverse_code=migrations.RunPython.noop
+        ),
     ]

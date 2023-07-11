@@ -6,35 +6,32 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('pyscada', '0041_update_protocol_id'),
-        ('smbus', '0002_auto_20170225_0908'),
+        ("pyscada", "0041_update_protocol_id"),
+        ("smbus", "0002_auto_20170225_0908"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ExtendedSMBusDevice',
-            fields=[
-            ],
+            name="ExtendedSMBusDevice",
+            fields=[],
             options={
-                'verbose_name': 'SMBus Device',
-                'proxy': True,
-                'verbose_name_plural': 'SMBus Devices',
-                'indexes': [],
+                "verbose_name": "SMBus Device",
+                "proxy": True,
+                "verbose_name_plural": "SMBus Devices",
+                "indexes": [],
             },
-            bases=('pyscada.device',),
+            bases=("pyscada.device",),
         ),
         migrations.CreateModel(
-            name='ExtendedSMbusVariable',
-            fields=[
-            ],
+            name="ExtendedSMbusVariable",
+            fields=[],
             options={
-                'verbose_name': 'SMBus Variable',
-                'proxy': True,
-                'verbose_name_plural': 'SMBus Variables',
-                'indexes': [],
+                "verbose_name": "SMBus Variable",
+                "proxy": True,
+                "verbose_name_plural": "SMBus Variables",
+                "indexes": [],
             },
-            bases=('pyscada.variable',),
+            bases=("pyscada.variable",),
         ),
     ]

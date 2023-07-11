@@ -6,9 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class PyScadaSMBusConfig(AppConfig):
-    name = 'pyscada.smbus'
+    name = "pyscada.smbus"
     verbose_name = _("PyScada SMBus Devices")
-    default_auto_field = 'django.db.models.AutoField'
+    default_auto_field = "django.db.models.AutoField"
 
     def ready(self):
         import pyscada.smbus.signals

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class Process(SingleDeviceDAQProcessWorker):
     device_filter = dict(smbusdevice__isnull=False, protocol_id=PROTOCOL_ID)
-    bp_label = 'pyscada.smbus-%s'
+    bp_label = "pyscada.smbus-%s"
 
     def __init__(self, dt=5, **kwargs):
         super(SingleDeviceDAQProcessWorker, self).__init__(dt=dt, **kwargs)

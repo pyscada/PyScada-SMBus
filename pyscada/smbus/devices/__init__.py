@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 try:
     import smbus
+
     driver_ok = True
 except ImportError:
     smbus = None
@@ -33,7 +34,7 @@ class GenericDevice(GenericHandlerDevice):
             self.inst = smbus.SMBus(int(self._device.smbusdevice.port))
         except Exception as e:
             self._not_accessible_reason = e
-            #logger.error(f"SMBus connect failed. Port : {self._device.smbusdevice.port} - id : {self._device.id} - "
+            # logger.error(f"SMBus connect failed. Port : {self._device.smbusdevice.port} - id : {self._device.id} - "
             #             f"name {self._device.short_name}")
             result = False
 
