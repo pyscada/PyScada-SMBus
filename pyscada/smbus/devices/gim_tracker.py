@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from pyscada.smbus.devices import GenericDevice
-from pyscada.models import VariableProperty, RecordedData
+from pyscada.models import VariableProperty, Variable
 from time import time
 from django.utils.timezone import now
 import logging
@@ -76,10 +76,8 @@ class Handler(GenericDevice):
             return True
         if variable.writeable:
             if variable.smbusvariable.information == "raz":
-                task.variable.update_value(1, time())
-                item = task.variable.create_recorded_data_element()
-                item.date_saved = now()
-                RecordedData.objects.bulk_create([item])
+                task.variable.update_values([1], [time()])
+                Variable.objects.write_multiple(items=[task.variable])
                 self.inst.write_byte_data(self._device.smbusdevice.address, 0x01, 2)
                 self.inst.write_byte_data(self._device.smbusdevice.address, 0x01, 0)
                 return self.parse_value(
